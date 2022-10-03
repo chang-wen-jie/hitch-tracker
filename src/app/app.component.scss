@@ -1,0 +1,20 @@
+@font-face {
+    font-family: plus-jakarta-sans;
+    src: url(../assets/fonts/PlusJakartaSans-Regular.ttf);
+}
+
+body {
+    font-family: plus-jakarta-sans;
+}
+
+.navbar {
+    text-align: center;
+    a {
+        margin-bottom: 50px;
+        font-size: 26px;
+        font-weight: bolder;
+        span {
+            color: darkred;
+        }
+    }
+}
