@@ -5,13 +5,14 @@
 
 body {
     font-family: plus-jakarta-sans;
+    background-color: #424242;
 }
 
 .navbar {
     text-align: center;
+    padding-top: 30px;
     a {
-        margin-bottom: 50px;
-        font-size: 26px;
+        font-size: 34px;
         font-weight: bolder;
         span {
             color: darkred;
