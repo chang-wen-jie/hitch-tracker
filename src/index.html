@@ -23,44 +23,60 @@
         bottom: 0;
         height: 65%;
         width: 50%;
-        border-radius: 50px;
+        border-radius: 20px;
       }
     </style>
   </head>
   <body class="mat-typography">
     <app-root></app-root>
+
+    <!-- MAPBOX API -->
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
     <link
       rel="stylesheet"
       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
       type="text/css"
     />
-
     <div id="map"></div>
-
     <script>
-      mapboxgl.accessToken = "pk.eyJ1IjoiY2hhbmd3ZW5qaWUiLCJhIjoiY2w4c253cnBhMGt6bTN5cGM0YXZwOG1iZSJ9.wtAz8bLhY3Zb3AYoQL5l0Q";
 
+      // GEOPOINT VIEW
+      mapboxgl.accessToken = "pk.eyJ1IjoiY2hhbmd3ZW5qaWUiLCJhIjoiY2w4c253cnBhMGt6bTN5cGM0YXZwOG1iZSJ9.wtAz8bLhY3Zb3AYoQL5l0Q";
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
         center: [5.725, 51.80917],
         zoom: 13,
       });
-      console.log("wat is dit", mapboxgl);
 
-      map.addControl(
-        new MapboxDirections({
-          accessToken: mapboxgl.accessToken,
-          profile: 'mapbox/driving',
-          startLocation: '5.725, 51.80917',
-        }),
-        "top-left",
-        (e) => {
-          console.log('waaaa', e);
-        }
-      );
+      // DIRECTIONS SUMMARY
+      const route = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        profile: 'mapbox/driving',
+        startLocation: '5.725, 51.80917',
+      });
+
+      map.addControl(route, 'top-left');
+
+      route.on("route", (e) => {
+        console.log('api response:', e);
+        const price = (e.route[0].distance / 1.6).toFixed(2);
+        console.log('kilometers::', price);
+      })
+
+      map.on('route', (e) => {
+         console.log('wawefoijawoiegjioawejgaat ', e);
+        map.addLayer({
+            id: 'terrain-data',
+            type: 'line',
+            source: {
+                type: 'vector',
+                url: 'mapbox://mapbox.mapbox-terrain-v2'
+            },
+            'source-layer': 'contour'
+        });
+      });
     </script>
-    Jouw prijs:
+    jouw prijs:
   </body>
 </html>
