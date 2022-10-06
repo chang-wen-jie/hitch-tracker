@@ -66,12 +66,14 @@
       route.on("route", (e) => {
         const distance = e.route[0].distance/1608.57875*1.609344;
         const price = (distance*1.75+5).toFixed(2);
+        document.getElementById("fare-placeholder").innerHTML = ""
         document.getElementById("fare-text").innerHTML = "Jouw prijs: "
         document.getElementById("fare").innerHTML = "€" + price;
         document.getElementById("fare-summary").innerHTML = "(€5 + €1.75/km)"
       })
     </script>
     <div class="fare-container">
+      <a id="fare-placeholder">Kies een startpunt en eindbestemming</a>
       <a id="fare-text"></a>
       <a style="color: darkred;" id="fare"></a>
       <p style="color: darkgreen; padding-top: 15px;" id="fare-summary"></p>
