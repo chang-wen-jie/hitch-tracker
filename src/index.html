@@ -1,15 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>HitchTracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet"/>
-    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <base href="/" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
     <style>
       body {
@@ -19,16 +28,26 @@
       #map {
         position: absolute;
         top: 100px;
-        left: 20%;
+        left: 10%;
         bottom: 0;
-        height: 65%;
-        width: 60%;
+        height: 80%;
+        width: 50%;
         border-radius: 20px;
       }
       .fare-container {
+        background-color: #e6e4e0;
         text-align: center;
-        margin-top: -10%;
-        font-size: 34px;
+        margin-top: -30%;
+        margin-left: 70%;
+        height: 15%;
+        width: 15%;
+        border-radius: 20px;
+      }
+      .fare-summary {
+        padding-top: 45px;
+      }
+      .fare-container a {
+        font-size: 24px;
       }
     </style>
   </head>
@@ -46,7 +65,8 @@
       let prijs;
 
       // GEOPOINT VIEW
-      mapboxgl.accessToken = "pk.eyJ1IjoiY2hhbmd3ZW5qaWUiLCJhIjoiY2w4c253cnBhMGt6bTN5cGM0YXZwOG1iZSJ9.wtAz8bLhY3Zb3AYoQL5l0Q";
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hhbmd3ZW5qaWUiLCJhIjoiY2w4c253cnBhMGt6bTN5cGM0YXZwOG1iZSJ9.wtAz8bLhY3Zb3AYoQL5l0Q";
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
@@ -57,26 +77,29 @@
       // DIRECTIONS SUMMARY
       const route = new MapboxDirections({
         accessToken: mapboxgl.accessToken,
-        profile: 'mapbox/driving',
-        startLocation: '5.725, 51.80917',
+        profile: "mapbox/driving",
+        startLocation: "5.725, 51.80917",
       });
 
-      map.addControl(route, 'top-left');
+      map.addControl(route, "top-left");
 
       route.on("route", (e) => {
-        const distance = e.route[0].distance/1608.57875*1.609344;
-        const price = (distance*1.75+5).toFixed(2);
-        document.getElementById("fare-placeholder").innerHTML = ""
-        document.getElementById("fare-text").innerHTML = "Jouw prijs: "
+        const distance = (e.route[0].distance / 1608.57875) * 1.609344;
+        const price = (distance * 1.75 + 5).toFixed(2);
+        document.getElementById("fare-placeholder").innerHTML = "";
+        document.getElementById("fare-text").innerHTML = "Jouw prijs: ";
         document.getElementById("fare").innerHTML = "€" + price;
-        document.getElementById("fare-summary").innerHTML = "(€5 + €1.75/km)"
-      })
+        document.getElementById("fare-info").innerHTML =
+          "(€5 instaptarief + €1.75/km)";
+      });
     </script>
     <div class="fare-container">
-      <a id="fare-placeholder">Kies een startpunt en eindbestemming</a>
-      <a id="fare-text"></a>
-      <a style="color: darkred;" id="fare"></a>
-      <p style="color: darkgreen; padding-top: 15px;" id="fare-summary"></p>
-  </div>
+      <div class="fare-summary">
+        <a id="fare-placeholder">Kies een startpunt en eindbestemming</a>
+        <a id="fare-text"></a>
+        <a style="color: darkred" id="fare"></a>
+        <p style="color: darkgreen" id="fare-info"></p>
+      </div>
+    </div>
   </body>
 </html>

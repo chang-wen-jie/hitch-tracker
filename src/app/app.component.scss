@@ -1,27 +1,21 @@
 @font-face {
-    font-family: plus-jakarta-sans;
-    src: url(../assets/fonts/PlusJakartaSans-Regular.ttf);
+  font-family: plus-jakarta-sans;
+  src: url(../assets/fonts/PlusJakartaSans-Regular.ttf);
 }
 
 body {
-    font-family: plus-jakarta-sans;
-    background-color: #424242;
-}
-
-.fare-sum {
-    margin-top: 100%;
-    font-size: 36px;
-    z-index: 999;
+  font-family: plus-jakarta-sans;
+  background-color: #424242;
 }
 
 .navbar {
-    text-align: center;
-    padding-top: 30px;
-    a {
-        font-size: 34px;
-        font-weight: bolder;
-        span {
-            color: darkred;
-        }
+  text-align: center;
+  padding-top: 30px;
+  a {
+    font-size: 34px;
+    font-weight: bolder;
+    span {
+      color: darkred;
     }
+  }
 }
